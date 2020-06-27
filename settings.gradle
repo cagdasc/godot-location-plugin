@@ -1,0 +1,3 @@
+include ':locationplugin'
+include ':app'
+rootProject.name = "LocationPlugin"

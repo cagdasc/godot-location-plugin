@@ -1,0 +1,9 @@
+[config]
+
+name="LocationPlugin"
+binary_type="local"
+binary="LocationPlugin.debug.aar"
+
+[dependencies]
+
+remote=["com.google.android.gms:play-services-location:17.0.0"]

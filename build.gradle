@@ -1,0 +1,52 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = "1.3.72"
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+def outputDir = "build/outputs"
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+tasks.register("generatePlugin", Copy.class) {
+    dependsOn "clean"
+    dependsOn "generateDebugPlugin"
+    dependsOn "generateReleasePlugin"
+
+}
+
+tasks.register("generateDebugPlugin", Copy.class) {
+    dependsOn ":locationplugin:assembleDebug"
+    from(file("locationplugin/build/outputs/aar/LocationPlugin.debug.aar"))
+    into("$outputDir/debug")
+    from(file("locationplugin/locationplugin.debug.gdap"))
+    into("$outputDir/debug")
+
+}
+
+tasks.register("generateReleasePlugin", Copy.class) {
+    dependsOn ":locationplugin:assembleRelease"
+    from(file("locationplugin/build/outputs/aar/LocationPlugin.release.aar"))
+    into("$outputDir/release")
+    from(file("locationplugin/locationplugin.release.gdap"))
+    into("$outputDir/release")
+}

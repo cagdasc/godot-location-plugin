@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cacaosd.locationplugin">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v1.LocationPlugin"
+            android:value="com.cacaosd.locationplugin.LocationKotlinPlugin" />
+    </application>
+</manifest>
