@@ -20,6 +20,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -111,7 +112,7 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
         request.interval = interval.toLong()
         request.maxWaitTime = maxWaitTime.toLong()
         request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        mFusedLocationClient!!.requestLocationUpdates(request, mLocationCallback, null)
+        mFusedLocationClient!!.requestLocationUpdates(request, mLocationCallback, Looper.getMainLooper())
         Log.d("GODOT", "Location update started.")
     }
 

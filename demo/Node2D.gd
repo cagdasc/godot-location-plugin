@@ -19,7 +19,9 @@ var singleton = null
 
 func _ready():
 	get_tree().connect("on_request_permissions_result", self, "result")
-	OS.request_permissions()
+	if (OS.request_permissions()):
+		print("permissions ok")
+		result("", true)
 
 func _exit_tree():
 	if singleton != null:
