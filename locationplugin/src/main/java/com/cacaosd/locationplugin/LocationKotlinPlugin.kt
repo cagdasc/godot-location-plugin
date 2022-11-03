@@ -29,6 +29,7 @@ import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.GodotPlugin
 import org.godotengine.godot.plugin.SignalInfo
+import org.godotengine.godot.plugin.UsedByGodot
 
 class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
 
@@ -71,7 +72,7 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
         return listOf(
             "startLocationUpdates",
             "stopLocationUpdates",
-            "getLastKnowLocation"
+            "getLastKnownLocation"
         )
     }
 
@@ -94,7 +95,7 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
             }
         }
     }
-
+    @UsedByGodot
     fun startLocationUpdates(interval: Int, maxWaitTime: Int) {
         if (locationUpdatesStart) return
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -115,7 +116,7 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
         mFusedLocationClient!!.requestLocationUpdates(request, mLocationCallback, Looper.getMainLooper())
         Log.d("GODOT", "Location update started.")
     }
-
+    @UsedByGodot
     fun stopLocationUpdates() {
         if (locationUpdatesStart && mLocationCallback != null) {
             locationUpdatesStart = false
@@ -123,8 +124,8 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
             Log.d("GODOT", "Location update stopped.")
         }
     }
-
-    fun getLastKnowLocation() {
+    @UsedByGodot
+    fun getLastKnownLocation() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
