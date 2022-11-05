@@ -22,7 +22,7 @@ startLocationUpdates(interval: Int, maxWaitTime: Int)
 stopLocationUpdates()
 
 # Get last location
-getLastKnowLocation()
+getLastKnownLocation()
 
 # Location updates signal
 onLocationUpdates(location_data: Dictionary)
